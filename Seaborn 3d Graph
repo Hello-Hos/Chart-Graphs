@@ -1,0 +1,51 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import os
+
+df=pd.read_csv(r'C:\Users\Hari Om\Downloads\adani.csv',parse_dates= True)
+
+df.head()
+
+df['H-L'] = df.high- df.low
+
+df['100MA'] = df['close'].rolling(100).mean()
+
+sns.set_style('darkgrid')
+
+ax=plt.axes(projection='3d')
+ax.scatter(df.index,df['H-L'],df['100MA'])
+ax.set_xlabel('Index')
+ax.set_ylabel('H-L')
+ax.set_zlabel('100MA')
+plt.show()
+
+import numpy as np
+
+z1=np.linspace(0,10,100)
+x1=np.cos(4*z1)
+y1=np.sin(4*z1)
+
+sns.set_style('whitegrid')
+ax=plt.axes(projection='3d')
+ax.plot3D(x1,y1,z1)
+plt.show()
+
+def return_z(x,y):
+    return 50-(x**2+y**2)
+
+
+sns.set_style('whitegrid')
+
+
+x1,y1=np.linspace(-5,5,50),np.linspace(-5,5,50)
+
+x1,y1=np.meshgrid(x1,y1)
+z1=return_z(x1,y1)
+
+ax=plt.axes(projection='3d')
+ax.plot_surface(x1,y1,z1)
+plt.show()
+
+
+
